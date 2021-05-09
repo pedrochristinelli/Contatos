@@ -8,34 +8,37 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.example.contatos.Model.Contato;
-import com.example.contatos.databinding.ActivityMainBinding;
+import com.example.contatos.databinding.ActivityContatoBinding;
 
-public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding activityMainBinding;
+import java.io.Serializable;
+
+public class ContatoActivity extends AppCompatActivity {
+    private ActivityContatoBinding activityContatoBinding;
 
     private final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(activityMainBinding.getRoot());
+        activityContatoBinding = ActivityContatoBinding.inflate(getLayoutInflater());
+        setContentView(activityContatoBinding.getRoot());
 
 
-        CheckBox celChkBx = ( CheckBox ) activityMainBinding.checkBoxCelular;
+        CheckBox celChkBx = ( CheckBox ) activityContatoBinding.checkBoxCelular;
         celChkBx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
                 if ( isChecked ){
-                    activityMainBinding.editCelular.setVisibility(View.VISIBLE);
+                    activityContatoBinding.editCelular.setVisibility(View.VISIBLE);
                 } else {
-                    activityMainBinding.editCelular.setVisibility(View.GONE);
+                    activityContatoBinding.editCelular.setVisibility(View.GONE);
                 }
             }
         });
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     "mailto", contato.getEmail(), null));
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hello "+contato.getNome()+"!");
             emailIntent.putExtra(Intent.EXTRA_TEXT, contato.toString());
-            
+
             startActivity(emailIntent);
         } else {
             Toast.makeText(this, "O campo que contêm essa informação está vazio!", Toast.LENGTH_SHORT).show();
@@ -96,18 +99,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickSaveButton(View view) {
         Contato contato = getContatoAtual();
-
-        Toast.makeText(this, contato.toString(), Toast.LENGTH_SHORT).show();
+        Intent retornoIntent = new Intent();
+        retornoIntent.putExtra(Intent.EXTRA_USER, contato);
+        setResult(RESULT_OK, retornoIntent);
+        finish();
     }
 
     private Contato getContatoAtual(){
         Contato contato = new Contato();
-        contato.setNome(activityMainBinding.editName.getText().toString() != null? activityMainBinding.editName.getText().toString() : "");
-        contato.setEmail(activityMainBinding.editEmail.getText().toString() != null? activityMainBinding.editEmail.getText().toString() : "");
-        contato.setCelular(activityMainBinding.editCelular.getText().toString() != null? activityMainBinding.editCelular.getText().toString() : "");
-        contato.setSitePessoal(activityMainBinding.editSite.getText().toString() != null? activityMainBinding.editSite.getText().toString() : "");
-        contato.setTelefone(activityMainBinding.editTelefone.getText().toString() != null? activityMainBinding.editTelefone.getText().toString() : "");
-        contato.setTefoneComercial(activityMainBinding.switch1.isChecked());
+        contato.setNome(activityContatoBinding.editName.getText().toString() != null? activityContatoBinding.editName.getText().toString() : "");
+        contato.setEmail(activityContatoBinding.editEmail.getText().toString() != null? activityContatoBinding.editEmail.getText().toString() : "");
+        contato.setCelular(activityContatoBinding.editCelular.getText().toString() != null? activityContatoBinding.editCelular.getText().toString() : "");
+        contato.setSitePessoal(activityContatoBinding.editSite.getText().toString() != null? activityContatoBinding.editSite.getText().toString() : "");
+        contato.setTelefone(activityContatoBinding.editTelefone.getText().toString() != null? activityContatoBinding.editTelefone.getText().toString() : "");
+        contato.setTefoneComercial(activityContatoBinding.switch1.isChecked());
 
         if (!(contato.getSitePessoal().contains("http://") || contato.getSitePessoal().contains("https://"))){
             contato.setSitePessoal("https://" + contato.getSitePessoal());
