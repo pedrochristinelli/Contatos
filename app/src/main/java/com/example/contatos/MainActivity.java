@@ -85,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
         if (!contato.getEmail().equals("")) {
             Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                     "mailto", contato.getEmail(), null));
-
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hello "+contato.getNome()+"!");
+            emailIntent.putExtra(Intent.EXTRA_TEXT, contato.toString());
+            
             startActivity(emailIntent);
         } else {
             Toast.makeText(this, "O campo que contêm essa informação está vazio!", Toast.LENGTH_SHORT).show();
