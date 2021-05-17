@@ -87,55 +87,25 @@
             android:hint="Site Pessoal"
             />
 
-    <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Salvar"
-            android:padding="3dp"
-            android:onClick="onClickSaveButton"
-            android:layout_margin="5dp"
-    />
+        <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Salvar"
+                android:padding="3dp"
+                android:onClick="onClickSaveButton"
+                android:layout_margin="5dp"
+        />
 
-    <Button
-            android:id="@+id/buttonEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enviar E-mail"
-            android:padding="3dp"
-            android:onClick="onClickEmailButton"
-            android:layout_margin="5dp"
-            />
-
-    <Button
-            android:id="@+id/buttonLigar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ligar para Telefone"
-            android:padding="3dp"
-            android:onClick="onClickTelefoneButton"
-            android:layout_margin="5dp"
-            />
-
-    <Button
-            android:id="@+id/buttonSite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Acessar Site Pessoal"
-            android:padding="3dp"
-            android:onClick="onClicWebsiteButton"
-            android:layout_margin="5dp"
-            />
-
-    <Button
-            android:id="@+id/buttonPdf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Exportar para PDF"
-            android:padding="3dp"
-            android:onClick="onClickPdfButton"
-            android:layout_margin="5dp"
-            />
+        <Button
+                android:id="@+id/buttonPdf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Exportar para PDF"
+                android:padding="3dp"
+                android:onClick="onClickPdfButton"
+                android:layout_margin="5dp"
+                />
 
     </LinearLayout>
 </ScrollView>
